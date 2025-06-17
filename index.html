@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #4e54c8, #8f94fb);
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .login-container {
+      width: 300px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      animation: container-appear 0.6s ease-out;
+      backdrop-filter: blur(8px);
+    }
+
+    @keyframes container-appear {
+      0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+      position: relative;
+      animation: slide-down 0.5s ease-out 0.3s both;
+    }
+
+    @keyframes slide-down {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 2px solid #eee;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+      animation: fade-in 0.5s ease-out both;
+    }
+
+    .login-container input[type="text"] {
+      animation-delay: 0.4s;
+    }
+
+    .login-container input[type="password"] {
+      animation-delay: 0.5s;
+    }
+
+    @keyframes fade-in {
+      0% {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .login-container input:focus {
+      outline: none;
+      border-color: #4e54c8;
+      box-shadow: 0 0 10px rgba(78, 84, 200, 0.1);
+      transform: scale(1.02);
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #4e54c8, #8f94fb);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      animation: fade-in 0.5s ease-out 0.6s both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-container button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(78, 84, 200, 0.3);
+    }
+
+    .login-container button:active {
+      transform: translateY(0);
+    }
+
+    /* Background animation */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #4e54c8, #8f94fb);
+      animation: bg-animation 15s ease infinite;
+      z-index: -1;
+    }
+
+    @keyframes bg-animation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Login</h2>
+    <form>
+      <input type="text" placeholder="Username" required>
+      <input type="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+</body>
+</html>
