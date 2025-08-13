@@ -1,160 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login Page</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Special Letter 💌</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --primary-color: #ff6b6b;
+        --accept-color: #28a745;
+        --reject-color: #dc3545;
+        --bg-gradient-start: #f9e0d2;
+        --bg-gradient-end: #fcefe6;
+    }
     body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #4e54c8, #8f94fb);
-      font-family: Arial, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+        background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+        font-family: 'Roboto', sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
     }
-
-    .login-container {
-      width: 300px;
-      padding: 40px;
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 10px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      animation: container-appear 0.6s ease-out;
-      backdrop-filter: blur(8px);
+    .password-box, .letter-box, .error-box, .final-message-box {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        max-width: 700px;
+        animation: fadeIn 1.5s ease-in-out;
+        text-align: center;
+        z-index: 10;
+        margin: 20px;
     }
-
-    @keyframes container-appear {
-      0% {
-        opacity: 0;
-        transform: translateY(20px) scale(0.9);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+    h1 {
+        font-family: 'Pacifico', cursive;
+        font-size: 2.5em;
+        color: var(--primary-color);
+        margin-bottom: 20px;
     }
-
-    .login-container h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      color: #333;
-      position: relative;
-      animation: slide-down 0.5s ease-out 0.3s both;
+    p {
+        font-size: 1.1em;
+        line-height: 1.8;
+        color: #333;
+        white-space: pre-line;
     }
-
-    @keyframes slide-down {
-      0% {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    input[type="text"] {
+        padding: 12px;
+        font-size: 1em;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        width: 80%;
+        margin-bottom: 20px;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
     }
-
-    .login-container input[type="text"],
-    .login-container input[type="password"] {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border: 2px solid #eee;
-      border-radius: 5px;
-      transition: all 0.3s ease;
-      box-sizing: border-box;
-      animation: fade-in 0.5s ease-out both;
+    button {
+        padding: 12px 25px;
+        border: none;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.1em;
+        margin: 10px;
+        transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
-
-    .login-container input[type="text"] {
-      animation-delay: 0.4s;
+    button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.2);
     }
-
-    .login-container input[type="password"] {
-      animation-delay: 0.5s;
+    .open-btn {
+        background-color: var(--primary-color);
     }
-
-    @keyframes fade-in {
-      0% {
-        opacity: 0;
-        transform: translateX(-20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(0);
-      }
+    .open-btn:hover {
+        background-color: #e55a5a;
     }
-
-    .login-container input:focus {
-      outline: none;
-      border-color: #4e54c8;
-      box-shadow: 0 0 10px rgba(78, 84, 200, 0.1);
-      transform: scale(1.02);
+    .accept-btn {
+        background-color: var(--accept-color);
     }
-
-    .login-container button {
-      width: 100%;
-      padding: 12px;
-      background: linear-gradient(135deg, #4e54c8, #8f94fb);
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      animation: fade-in 0.5s ease-out 0.6s both;
-      position: relative;
-      overflow: hidden;
+    .accept-btn:hover {
+        background-color: #218838;
     }
-
-    .login-container button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(78, 84, 200, 0.3);
+    .reject-btn {
+        background-color: var(--reject-color);
     }
-
-    .login-container button:active {
-      transform: translateY(0);
+    .reject-btn:hover {
+        background-color: #c82333;
     }
-
-    /* Background animation */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #4e54c8, #8f94fb);
-      animation: bg-animation 15s ease infinite;
-      z-index: -1;
+    .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        animation: popIn 0.4s ease;
+        text-align: center;
+        z-index: 1000;
     }
-
-    @keyframes bg-animation {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
+    .popup button {
+        margin: 5px;
     }
-  </style>
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes popIn {
+        from { transform: translate(-50%, -60%) scale(0.8); opacity: 0; }
+        to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+</style>
 </head>
 <body>
 
-  <div class="login-container">
-    <h2>Login</h2>
-    <form>
-      <input type="text" placeholder="Username" required>
-      <input type="password" placeholder="Password" required>
-      <button type="submit">Login</button>
-    </form>
-  </div>
+<div class="password-box" id="passwordBox">
+    <h1>Enter Your Name in One word 💬</h1>
+    <input type="text" id="nameInput" placeholder="Enter name here" onkeydown="if(event.key==='Enter') checkName();">
+    <br>
+    <button onclick="checkName()" class="open-btn">Open Letter</button>
+    <p id="errorMsg" style="display:none; color:red; font-weight:bold;">❌ Wrong name! Try again.</p>
+</div>
+
+<div class="letter-box" id="letterBox" style="display:none;">
+    <h1>Hi there 💌</h1>
+    <p>
+I think that I am going to do it, It will be right I am not. But I have to do this.
+
+I have known you since class 9 and we are in class 11. Back then, when we looked at each other, I wanted to say this, but I didn’t have the courage. Today, I am finally telling you.
+
+<b style="font-size:1.5em; color:var(--primary-color);">I Love You</b>.
+
+Whether you accept it or not is your decision but at least everything between us will be clean. Think carefully before you reply, because after this, there is nothing more I can do.
+    </p>
+    <button class="accept-btn" onclick="confirmAction('accept')">Accept</button>
+    <button class="reject-btn" onclick="confirmAction('reject')">Reject</button>
+</div>
+
+<div class="final-message-box" id="finalMessageBox" style="display:none;">
+    <h1>Thank You! 😊</h1>
+</div>
+
+<div class="popup" id="popupBox">
+    <p id="popupMessage" style="font-size:1.2em; font-weight:bold;"></p>
+    <button onclick="sendResponse()" class="accept-btn">Yes, I'm Sure</button>
+    <button onclick="closePopup()" class="reject-btn">No, Go Back</button>
+</div>
+
+<script>
+let pendingAction = null;
+const webhookUrl = "https://discord.com/api/webhooks/1405083402113126412/v-2j2u2FYW9Cu6mRLXAfFFwbTN3VWuvxEeIfKcsZe-8-PDOJNNSwbOMHT7u3D7nVQ08Z";
+
+const passwordBox = document.getElementById('passwordBox');
+const letterBox = document.getElementById('letterBox');
+const finalMessageBox = document.getElementById('finalMessageBox');
+const nameInput = document.getElementById('nameInput');
+const errorMsg = document.getElementById('errorMsg');
+const popupBox = document.getElementById('popupBox');
+const popupMessage = document.getElementById('popupMessage');
+
+function checkName() {
+    if (nameInput.value.trim().toLowerCase() === 'ankita') {
+        errorMsg.style.display = 'none';
+        passwordBox.style.display = 'none';
+        letterBox.style.display = 'block';
+    } else {
+        errorMsg.style.display = 'block';
+        nameInput.focus();
+    }
+}
+
+function confirmAction(action) {
+    pendingAction = action;
+    popupMessage.innerText = "Are you absolutely sure you want to " + action + "?";
+    popupBox.style.display = 'block';
+}
+
+function closePopup() {
+    popupBox.style.display = 'none';
+}
+
+function sendResponse() {
+    let message = pendingAction === 'accept' ? "❤️ **Ankita has Accepted the confession!** ❤️" : "💔 **Ankita has Rejected the confession.** 💔";
+    let color = pendingAction === 'accept' ? 65280 : 16711680;
+    
+    const payload = {
+      content: `@everyone A new response has been recorded!`,
+      embeds: [{
+        title: "Confession Response",
+        description: message,
+        color: color,
+        timestamp: new Date().toISOString()
+      }]
+    };
+
+    fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    })
+    .then(() => {
+        closePopup();
+        letterBox.style.display = 'none';
+        finalMessageBox.style.display = 'block';
+    })
+    .catch(error => {
+        console.error("Webhook Error:", error);
+        alert("Sorry, there was an error sending your response. Please try again.");
+        closePopup();
+    });
+}
+</script>
 
 </body>
 </html>
